@@ -1,6 +1,8 @@
 plugin_name = housekeeping
 
 COMMON_FILES =				\
+	gsd-gpu-mem.c			\
+	gsd-gpu-mem.h			\
 	gsd-disk-space.c		\
 	gsd-disk-space.h		\
 	gsd-disk-space-helper.h		\
@@ -11,20 +13,20 @@ noinst_PROGRAMS = gsd-disk-space-test gsd-empty-trash-test gsd-purge-temp-test
 gsd_disk_space_test_SOURCES =		\
 	gsd-disk-space-test.c		\
 	$(COMMON_FILES)
-gsd_disk_space_test_LDADD = $(HOUSEKEEPING_LIBS)
+gsd_disk_space_test_LDADD = $(HOUSEKEEPING_LIBS) -lm -ldl
 gsd_disk_space_test_CFLAGS =		\
 	$(HOUSEKEEPING_CFLAGS)
 
 gsd_empty_trash_test_SOURCES =		\
 	gsd-empty-trash-test.c		\
 	$(COMMON_FILES)
-gsd_empty_trash_test_LDADD = $(HOUSEKEEPING_LIBS)
+gsd_empty_trash_test_LDADD = $(HOUSEKEEPING_LIBS) -lm -ldl
 gsd_empty_trash_test_CFLAGS = $(HOUSEKEEPING_CFLAGS)
 
 gsd_purge_temp_test_SOURCES =		\
 	gsd-purge-temp-test.c		\
 	$(COMMON_FILES)
-gsd_purge_temp_test_LDADD = $(HOUSEKEEPING_LIBS)
+gsd_purge_temp_test_LDADD = $(HOUSEKEEPING_LIBS) -lm -ldl
 gsd_purge_temp_test_CFLAGS = $(HOUSEKEEPING_CFLAGS)
 
 libexec_PROGRAMS = gsd-housekeeping
@@ -51,7 +53,7 @@ gsd_housekeeping_CFLAGS =		\
 gsd_housekeeping_LDADD =					\
 	$(top_builddir)/gnome-settings-daemon/libgsd.la		\
 	$(top_builddir)/plugins/common/libcommon.la		\
-	$(HOUSEKEEPING_LIBS)
+	$(HOUSEKEEPING_LIBS) -lm -ldl
 
 desktopdir = $(sysconfdir)/xdg/autostart
 desktop_in_files = org.gnome.SettingsDaemon.Housekeeping.desktop.in

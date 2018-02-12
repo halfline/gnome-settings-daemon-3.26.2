@@ -3,6 +3,7 @@ NULL =
 enabled_plugins =	\
 	a11y-keyboard	\
 	a11y-settings	\
+	account		\
 	clipboard	\
 	color		\
 	datetime	\

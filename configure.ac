@@ -155,6 +155,11 @@ PKG_CHECK_MODULES(A11Y_SETTINGS,
 		  gio-2.0
 		  gsettings-desktop-schemas >= $GSETTINGS_DESKTOP_SCHEMAS_REQUIRED_VERSION)
 
+PKG_CHECK_MODULES(ACCOUNT,
+		  gtk+-3.0
+		  gio-unix-2.0
+		  libnotify >= $LIBNOTIFY_REQUIRED_VERSION)
+
 PKG_CHECK_MODULES(CLIPBOARD,
 		  gtk+-x11-3.0
 		  x11)
@@ -507,6 +512,7 @@ gnome-settings-daemon/Makefile
 plugins/Makefile
 plugins/a11y-keyboard/Makefile
 plugins/a11y-settings/Makefile
+plugins/account/Makefile
 plugins/clipboard/Makefile
 plugins/color/Makefile
 plugins/common/Makefile

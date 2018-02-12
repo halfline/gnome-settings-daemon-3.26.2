@@ -128,6 +128,7 @@ handle_unit_cb (GObject      *source_object,
 static void
 gsd_sharing_manager_handle_service (GsdSharingManager   *manager,
                                     const char          *method,
+                                    GAsyncReadyCallback  callback,
                                     ServiceInfo         *service)
 {
         char *service_file;
@@ -143,8 +144,8 @@ gsd_sharing_manager_handle_service (GsdSharingManager   *manager,
                                 G_DBUS_CALL_FLAGS_NONE,
                                 -1,
                                 manager->priv->cancellable,
-                                handle_unit_cb,
-                                (gpointer) method);
+                                callback,
+                                manager);
         g_free (service_file);
 }
 
@@ -157,7 +158,8 @@ gsd_sharing_manager_start_service (GsdSharingManager *manager,
         /* We use StartUnit, not StartUnitReplace, since the latter would
          * cancel any pending start we already have going from an
          * earlier _start_service() call */
-        gsd_sharing_manager_handle_service (manager, "StartUnit", service);
+        gsd_sharing_manager_handle_service (manager, "StartUnit",
+                                            handle_unit_cb, "start");
 }
 
 static void
@@ -166,7 +168,8 @@ gsd_sharing_manager_stop_service (GsdSharingManager *manager,
 {
         g_debug ("About to stop %s", service->name);
 
-        gsd_sharing_manager_handle_service (manager, "StopUnit", service);
+        gsd_sharing_manager_handle_service (manager, "StopUnit",
+                                            handle_unit_cb, "stop");
 }
 
 #ifdef HAVE_NETWORK_MANAGER

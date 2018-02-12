@@ -9,6 +9,7 @@ gsettings_ENUM_FILES = $(top_srcdir)/data/$(api_DATA)
 gsettings_SCHEMAS =							\
 	org.gnome.settings-daemon.peripherals.gschema.xml		\
 	org.gnome.settings-daemon.plugins.gschema.xml			\
+	org.gnome.settings-daemon.plugins.account.gschema.xml		\
 	org.gnome.settings-daemon.plugins.power.gschema.xml		\
 	org.gnome.settings-daemon.plugins.color.gschema.xml		\
 	org.gnome.settings-daemon.plugins.media-keys.gschema.xml	\
